@@ -106,14 +106,14 @@ public class LdapAuthentication {
 			// maybe more than one element
 			while (en.hasMoreElements()) {
 				SearchResult obj = en.nextElement();
-				if (!Objects.isNull(obj)) {
+				if (!ValidateUtils.isNull(obj)) {
 					// 携带LDAP更多元信息以填充用户元信息
 					LdapPrincipal ldapPrincipal = new LdapPrincipal();
 					ldapPrincipal.setUserDN(obj.getName() + "," + kmAccountConfig.getLdapBaseDN());
 
 					Attributes attributes = obj.getAttributes();
 					//校验成功后 在获取值
-					if (!Objects.isNull(attributes)) {
+					if (!ValidateUtils.isNull(attributes)) {
 						ldapPrincipal.setSAMAccountName(getStringValueFromAttributes(attributes, "samaccountname"));
 						ldapPrincipal.setDepartment(getStringValueFromAttributes(attributes, "department"));
 						ldapPrincipal.setCompany(getStringValueFromAttributes(attributes, "company"));
