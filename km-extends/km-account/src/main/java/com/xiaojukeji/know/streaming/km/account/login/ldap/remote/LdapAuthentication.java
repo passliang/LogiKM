@@ -5,8 +5,8 @@ import com.didiglobal.logi.security.exception.LogiSecurityException;
 import com.xiaojukeji.know.streaming.km.account.KmAccountConfig;
 import com.xiaojukeji.know.streaming.km.account.common.ldap.LdapPrincipal;
 import com.xiaojukeji.know.streaming.km.account.common.ldap.exception.LdapException;
+import com.xiaojukeji.know.streaming.km.common.utils.ValidateUtils;
 import org.apache.commons.lang3.ArrayUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -138,17 +138,22 @@ public class LdapAuthentication {
 		//增加 多重校验
 		int two = 2;
 		Attribute attribute = attributes.get(attrId);
-		if (!Objects.isNull(attribute)) {
-			String str = attribute.toString();
-			if (StringUtils.isNotEmpty(str)) {
-				String[] split = str.split(":\\s+");
-				if (ArrayUtils.isNotEmpty(split)) {
-					if (split.length >= two) {
-						return split[1];
-					}
-				}
+		if(ValidateUtils.isNull(attribute)){
+			return "";
+		}
+
+		String str = attribute.toString();
+		if(ValidateUtils.isBlank(str)){
+			return "";
+		}
+		//分割字符串
+		String[] split = str.split(":\\s+");
+		if (ArrayUtils.isNotEmpty(split)) {
+			if (split.length >= two) {
+				return split[1];
 			}
 		}
+
 		return "";
 	}
 
