@@ -136,12 +136,12 @@ public class LdapAuthentication {
 		//增加 多重校验
 		int two = 2;
 		Attribute attribute = attributes.get(attrId);
-		if(ValidateUtils.isNull(attribute)){
+		if (ValidateUtils.isNull(attribute)) {
 			return "";
 		}
 
 		String str = attribute.toString();
-		if(ValidateUtils.isBlank(str)){
+		if (ValidateUtils.isBlank(str)) {
 			return "";
 		}
 		//分割字符串
