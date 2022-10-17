@@ -133,7 +133,7 @@ public class LdapAuthentication {
 	}
 
 	private String getStringValueFromAttributes(Attributes attributes, String attrId) {
-		//增加 多重校验 提前中断
+		//增加 多重校验
 		int two = 2;
 		Attribute attribute = attributes.get(attrId);
 		if (ValidateUtils.isNull(attribute)) {
