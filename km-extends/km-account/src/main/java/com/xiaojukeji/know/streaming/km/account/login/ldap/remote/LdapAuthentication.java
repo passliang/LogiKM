@@ -92,11 +92,7 @@ public class LdapAuthentication {
 			constraints.setSearchScope(SearchControls.SUBTREE_SCOPE);
 
 			// 查找
-			NamingEnumeration<SearchResult> en = ctx.search(
-					"",
-					"(&(objectClass=*)(" + kmAccountConfig.getLdapFilter() + "=" + userName + "))",
-					constraints
-			);
+			NamingEnumeration<SearchResult> en = ctx.search("", "(&(objectClass=*)(" + kmAccountConfig.getLdapFilter() + "=" + userName + "))", constraints);
 			if (en == null || !en.hasMoreElements()) {
 				// 用户不存在
 				throw new LogiSecurityException(ResultCode.USER_NOT_EXISTS);
